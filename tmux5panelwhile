@@ -1,0 +1,26 @@
+#!/bin/bash
+while :
+do
+read -p "Option:: " opt
+echo "$opt"
+
+case $opt in
+0)
+tmux send-keys -t 0 "clear;echo Running...;sleep 1;date;echo 'this is 0'" C-m
+;;
+1)
+tmux send-keys -t 1 "clear;echo Running...;sleep 1;date;echo 'this is 1'" C-m
+;;
+2)
+tmux send-keys -t 2 "clear;echo Running...;sleep 1;date;echo 'this is 2'" C-m
+;;
+3)
+tmux send-keys -t 3 "clear;echo Running...;sleep 1;date;echo 'this is 3'" C-m
+;;
+quit)
+#### tmux display-message -p '#S' gets the current session name, kill-session ends it
+#### you want to do this instead of kill window because you can have multiple windows under the same session
+tmux kill-session -t $(tmux display-message -p '#S')
+;;
+esac
+done
