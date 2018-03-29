@@ -1,0 +1,25 @@
+#!/bin/bash
+#### avoiding issues with $1 being overwritten by the next 'set' command
+input="$1"
+#### Get terminal size
+set -- $(stty size) # $1 = rows $2 = columns
+#### Create new tmux session naming it with input and setting the size to existing terminal size
+tmux -2 new-session -d -s "$input" -x "$2" -y "$(($1 - 1))"
+#### Renaming  window for easy identification
+tmux rename-window "Tmux5Panel"
+
+#### Start creating the 5 panels
+tmux split-window -v
+#### Resizing early so next panels are created evenly
+tmux resize-pane -t 0 -U 16
+tmux split-window -v -t 1
+
+tmux split-window -h -t 1
+tmux split-window -h -t 3
+
+#### We want the bottom right panel to be our "control panel" so running the while script in it
+#### C-m is 'return' for tmux, without C-m it just sends text without 'enter'
+tmux send-keys -t 4 "clear;./tmux5panelwhile" C-m
+#### Now lets connect
+tmux -2 attach-session -t "$input"
+
