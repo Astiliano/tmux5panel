@@ -17,6 +17,9 @@ tmux send-keys -t 2 "clear;echo Running...;sleep 1;date;echo 'this is 2'" C-m
 3)
 tmux send-keys -t 3 "clear;echo Running...;sleep 1;date;echo 'this is 3'" C-m
 ;;
+d)
+tmux detach
+;;
 quit)
 #### tmux display-message -p '#S' gets the current session name, kill-session ends it
 #### you want to do this instead of kill window because you can have multiple windows under the same session
