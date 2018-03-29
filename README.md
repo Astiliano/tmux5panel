@@ -21,13 +21,26 @@ in the whilescript you have options:
 1 ## send keys to panel 1
 2 ## send keys to panel 2
 3 ## send keys to panel 3
+d ## detach from tmux session (leave running in background)
 quit ## kills the tmux session you're in
 ```
 
 
-If you want to detach from the tmux session but still have it running in the background, press the following keys
+## Returning to previous session:
+###### From Inside Tmux
 ```
-CTRL+b then d
+CTRL+b then w ## lists all windows, press arrow keys then ENTER
+```
+##### From Outside Tmux
+
+###### Attach to last session
+```
+tmux a
+```
+###### Attach to a different session
+```
+tmux ls ## Find session name
+tmux a -t [SessionName]
 ```
 
 
